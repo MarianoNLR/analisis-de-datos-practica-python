@@ -60,6 +60,16 @@ def eliminar_producto(gestion):
     gestion.eliminar_producto(codigo)
     input("Presione Enter para continuar...")
 
+def listar_productos(gestion): 
+    productos = gestion.leer_datos()
+    
+    for producto in productos.values():
+        if 'fecha_vencimiento' in producto:
+            print(f"{ProductoAlimenticio(**producto)}")
+        else:
+            print(f"{ProductoElectronico(**producto)}")
+        print("==========================================")
+    input("Presione Enter para continuar...")
 if __name__ == "__main__":
     archivo_productos = 'productos_db.json'
     gestion = GestionProductos(archivo_productos)
@@ -80,7 +90,7 @@ if __name__ == "__main__":
             eliminar_producto(gestion)
             pass
         elif opcion == '6':
-            #TODO Listar productos
+            listar_productos(gestion)
             pass
         elif opcion == '7':
             break;
