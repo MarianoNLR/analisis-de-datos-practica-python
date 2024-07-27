@@ -2,8 +2,8 @@ import Producto
 
 
 class ProductoElectronico(Producto): 
-    def __init__(self, nombre, precio, stock, marca, categoria, color, meses_garantia):
-        super().__init__(nombre, precio, stock, marca, categoria)
+    def __init__(self, codigo_producto, nombre, precio, stock, marca, categoria, color, meses_garantia):
+        super().__init__(codigo_producto, nombre, precio, stock, marca, categoria)
         self.color = color
         self.meses_garantia = meses_garantia
     

@@ -1,8 +1,8 @@
 import Producto
 
 class ProductoAlimenticio(Producto):
-    def __init__(self, nombre, precio, stock, marca, categoria, fecha_vencimiento, es_libre_gluten):
-        super().__init__(nombre, precio, stock, marca, categoria)
+    def __init__(self, codigo_producto, nombre, precio, stock, marca, categoria, fecha_vencimiento, es_libre_gluten):
+        super().__init__(codigo_producto, nombre, precio, stock, marca, categoria)
         self.fecha_vencimiento = fecha_vencimiento
         self.es_libre_gluten = es_libre_gluten
         

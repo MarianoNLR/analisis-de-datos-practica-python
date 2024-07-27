@@ -1,5 +1,6 @@
 class Producto:
-    def __init__(self, nombre, precio, stock, marca, categoria):
+    def __init__(self, codigo_producto, nombre, precio, stock, marca, categoria):
+        self.codigo_producto = codigo_producto
         self.nombre = nombre
         self.precio = precio
         self.stock = stock
@@ -28,6 +29,7 @@ class Producto:
     
     def to_dict(self):
         return {
+            "codigo_producto": self.codigo_producto,
             "nombre": self.nombre,
             "precio": self.precio,
             "stock": self.stock,
@@ -37,6 +39,7 @@ class Producto:
     
     def __str__(self):
         return f"""==== Detalles Producto ====
+                Codigo: {self.codigo_producto}
                 Nombre: {self.nombre}
                 Precio: {self.precio}
                 Stock: {self.stock}
