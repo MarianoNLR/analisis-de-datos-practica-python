@@ -1,3 +1,4 @@
+import errno
 import json
 import ProductoAlimenticio
 import ProductoElectronico
@@ -49,10 +50,30 @@ class GestionProductos:
             print(f"Error al leer el producto: {error}")
             
     def agregar_producto(self, producto):
-        pass
+        try:
+            datos = self.leer_datos()
+            
+            if producto.codigo_producto in datos.keys():
+                print(f"Ya existe un producto con el codigo proporcionado: {producto.codigo_producto}.")
+            else:
+                datos[producto.codigo_producto] = producto.to_dict()
+                self.guardar_datos(datos)
+                print(f"Producto guardado exitosamente!")
+            
+        except Exception as error:
+            print(f"Error inesperado al guardar el nuevo producto: {error}")
     
-    def eliminar_producto(self):
-        pass
+    def eliminar_producto(self, codigo_producto):
+        try:
+            datos = self.leer_datos()
+            if str(codigo_producto) in datos.keys():
+                del datos[codigo_producto]
+                self.guardar_datos(datos)
+                print(f"El producto con codigo {codigo_producto} ha sido eliminado.")
+            else:
+                print(f"No se ha encontrado un producto con el codigo proporcionado.")
+        except Exception as error:
+            print(f"Error inesperado al eliminar el producto: {error}")
     
     def actualizar_producto(self, codigo_producto):
         pass
