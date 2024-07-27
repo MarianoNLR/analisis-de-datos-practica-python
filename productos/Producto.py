@@ -43,10 +43,10 @@ class Producto:
     
     def __str__(self):
         return f"""==== Detalles Producto ====
-                Codigo: {self._codigo_producto}
-                Nombre: {self._nombre}
-                Precio: {self._precio}
-                Stock: {self._stock}
-                Marca: {self._marca}
-                Categoria: {self._categoria}
-                """
+        Codigo: {self._codigo_producto}
+        Nombre: {self._nombre}
+        Precio: {self._precio}
+        Stock: {self._stock}
+        Marca: {self._marca}
+        Categoria: {self._categoria}
+        """
