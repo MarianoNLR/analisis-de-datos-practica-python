@@ -50,6 +50,16 @@ def agregar_producto(gestion, opcion_producto):
     except Exception as error:
         print(f"Error: {error}")
 
+def buscar_producto_por_codigo(gestion):
+    codigo = input("Ingrese el codigo del producto: ")
+    gestion.leer_producto(codigo)
+    input("Presione Enter para continuar...")
+
+def eliminar_producto(gestion):
+    codigo = input("Ingrese el codigo del producto: ")
+    gestion.eliminar_producto(codigo)
+    input("Presione Enter para continuar...")
+
 if __name__ == "__main__":
     archivo_productos = 'productos_db.json'
     gestion = GestionProductos(archivo_productos)
@@ -61,4 +71,19 @@ if __name__ == "__main__":
         
         if opcion == '1' or opcion == '2':
             agregar_producto(gestion, opcion)
+        elif opcion == '3':
+            buscar_producto_por_codigo(gestion)
+        elif opcion == '4':
+            #TODO Actualizar producto
+            pass
+        elif opcion == '5':
+            eliminar_producto(gestion)
+            pass
+        elif opcion == '6':
+            #TODO Listar productos
+            pass
+        elif opcion == '7':
+            break;
+        else: 
+            print('Opcion inválida.')
         
