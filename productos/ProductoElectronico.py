@@ -23,6 +23,5 @@ class ProductoElectronico(Producto):
         return data
     
     def __str__(self):
-        return f"""{super().__str__()}
-                Color: {self.color}
-                Garantia: {self.meses_garantia} (Meses)"""
+        return f"""{super().__str__()}Color: {self.color}
+        Garantia: {self.meses_garantia} (Meses)"""
