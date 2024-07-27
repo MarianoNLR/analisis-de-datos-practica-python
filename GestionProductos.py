@@ -75,5 +75,14 @@ class GestionProductos:
         except Exception as error:
             print(f"Error inesperado al eliminar el producto: {error}")
     
-    def actualizar_producto(self, codigo_producto):
-        pass
+    def actualizar_producto(self, codigo_producto, campo, valor):
+        try:
+            datos = self.leer_datos()
+            if str(codigo_producto) in datos.keys():
+                datos[codigo_producto][campo] = valor
+                self.guardar_datos(datos)
+                print(f"{campo} actualizado correctamente.")
+            else:
+                print(f"No existe producto con el codigo proporcionado.")
+        except Exception as error:
+            print(f"Error al actualizar producto: {error}")
