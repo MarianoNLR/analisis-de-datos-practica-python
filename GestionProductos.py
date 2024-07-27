@@ -71,7 +71,7 @@ class GestionProductos:
                 self.guardar_datos(datos)
                 print(f"El producto con codigo {codigo_producto} ha sido eliminado.")
             else:
-                print(f"No se ha encontrado un producto con el codigo proporcionado.")
+                print(f"No se ha encontrado producto con el codigo proporcionado.")
         except Exception as error:
             print(f"Error inesperado al eliminar el producto: {error}")
     
