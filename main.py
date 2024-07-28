@@ -52,8 +52,8 @@ def agregar_producto(gestion, opcion_producto):
 
 def buscar_producto_por_codigo(gestion):
     codigo = input("Ingrese el codigo del producto: ")
-    gestion.leer_producto(codigo)
-    input("Presione Enter para continuar...")
+    producto = gestion.leer_producto(codigo)
+    return producto
 
 def eliminar_producto(gestion):
     codigo = input("Ingrese el codigo del producto: ")
@@ -70,6 +70,100 @@ def listar_productos(gestion):
             print(f"{ProductoElectronico(**producto)}")
         print("==========================================")
     input("Presione Enter para continuar...")
+
+def actualizar_producto(gestion):
+    producto = buscar_producto_por_codigo(gestion)
+    print("========== Menú de Actualizacion ==========")
+    opcion_valida = False
+    opciones_campos = {
+        '1': "nombre",
+        '2': "precio",
+        '3': "stock",
+        '4': "marca",
+        '5': "categoria",
+    }
+    while True:
+        mostrar_menu_actualizar_campos(producto)
+        opcion = input("Seleccione el campo que desea actualizar: ")
+        
+        if opcion == '8':
+            break
+        
+        campo = opciones_campos.get(opcion)
+            
+        if opcion == '6':
+            if 'fecha_vencimiento' in producto:
+                campo = "fecha_vencimiento"
+            else:
+                campo = "color"
+        if opcion == '7':
+            if 'fecha_vencimiento' in producto:
+                campo = "es_libre_gluten"
+            else:
+                campo = "meses_garantia"
+
+        if campo is None:
+            print("Ingrese una opcion válida")
+            continue
+        
+        print(f"Campo a actualizar: {campo}")
+        valor = input(f"Nuevo {campo}: ")
+        '''
+        #     opcion_valida = True
+        # if opcion == '1':
+        #     campo = "nombre"
+        #     opcion_valida = True
+        # if opcion == '2':
+        #     campo = "precio"
+        #     opcion_valida = True
+        # if opcion == '3':
+        #     campo = "stock"
+        #     opcion_valida = True
+        # if opcion == '4':
+        #     campo = "marca"
+        #     opcion_valida = True
+        # if opcion == '5':
+        #     campo = "categoria"
+        #     opcion_valida = True
+        # if opcion == '6':
+        #     if 'fecha_vencimiento' in producto:
+        #         campo = "fecha_vencimiento"
+        #     else:
+        #         campo = "color"
+        # if opcion == '7':
+        #     if 'fecha_vencimiento' in producto:
+        #         campo = "es_libre_gluten"
+        #     else:
+        #         campo = "meses_garantia"
+        #     opcion_valida = True
+        # if opcion == '8':
+        #     break
+        
+        # if not opcion_valida:
+        #     print("Ingrese una opcion valida.")
+        '''
+        gestion.actualizar_producto(producto['codigo_producto'], campo, valor)
+
+def mostrar_menu_actualizar_campos(producto):
+    menu = """
+========= Seleccione el campo a actualizar =========
+1.Nombre.
+2.Precio.
+3.Stock.
+4.Marca.
+5.Categoria.
+"""
+    if 'fecha_vencimiento' in producto:
+        menu += """6.Fecha de Vencimiento.
+7.Libre de gluten.
+8.Salir."""
+    else:
+        menu += """6.Color.
+7.Meses de garantía.
+8.Salir."""
+        
+    print(menu)
+
 if __name__ == "__main__":
     archivo_productos = 'productos_db.json'
     gestion = GestionProductos(archivo_productos)
@@ -82,10 +176,17 @@ if __name__ == "__main__":
         if opcion == '1' or opcion == '2':
             agregar_producto(gestion, opcion)
         elif opcion == '3':
-            buscar_producto_por_codigo(gestion)
+            producto_datos = buscar_producto_por_codigo(gestion)
+            mensaje_consola = ""
+            if 'fecha_vencimiento' in producto_datos:
+                producto = ProductoAlimenticio(**producto_datos)
+                mensaje_consola += """==== Producto Alimenticio ====\n"""
+            else:
+                producto = ProductoElectronico(**producto_datos)
+                mensaje_consola += """==== Producto Electronico ====\n"""
+            mensaje_consola += f"{producto}"
         elif opcion == '4':
-            #TODO Actualizar producto
-            pass
+            actualizar_producto(gestion)
         elif opcion == '5':
             eliminar_producto(gestion)
             pass
