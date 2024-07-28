@@ -32,18 +32,17 @@ class GestionProductos:
     def leer_producto(self, codigo_producto):
         try:
             datos = self.leer_datos()
-            mensaje_consola = ""
             if codigo_producto in datos:
                 producto_datos = datos[codigo_producto]
                 
-                if 'fecha_vencimiento' in producto_datos:
-                    producto = ProductoAlimenticio(**producto_datos)
-                    mensaje_consola += """==== Producto Alimenticio ====\n"""
-                else:
-                    producto = ProductoElectronico(**producto_datos)
-                    mensaje_consola += """==== Producto Electronico ====\n"""
-                mensaje_consola += f"{producto}"
-                print(mensaje_consola)
+                # if 'fecha_vencimiento' in producto_datos:
+                #     producto = ProductoAlimenticio(**producto_datos)
+                #     mensaje_consola += """==== Producto Alimenticio ====\n"""
+                # else:
+                #     producto = ProductoElectronico(**producto_datos)
+                #     mensaje_consola += """==== Producto Electronico ====\n"""
+                # mensaje_consola += f"{producto}"
+                return producto_datos
             else:
                 print(f"No se ha encontrado un producto con el codigo: {codigo_producto}.")
                 
