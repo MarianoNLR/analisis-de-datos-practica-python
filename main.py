@@ -53,6 +53,7 @@ def agregar_producto(gestion, opcion_producto):
 def buscar_producto_por_codigo(gestion):
     codigo = input("Ingrese el codigo del producto: ")
     producto = gestion.leer_producto(codigo)
+    input("Presione Enter para continuar...")
     return producto
 
 def eliminar_producto(gestion):
@@ -143,6 +144,7 @@ def actualizar_producto(gestion):
         #     print("Ingrese una opcion valida.")
         '''
         gestion.actualizar_producto(producto['codigo_producto'], campo, valor)
+        input("Presione Enter para continuar...")
 
 def mostrar_menu_actualizar_campos(producto):
     menu = """
@@ -185,6 +187,7 @@ if __name__ == "__main__":
                 producto = ProductoElectronico(**producto_datos)
                 mensaje_consola += """==== Producto Electronico ====\n"""
             mensaje_consola += f"{producto}"
+            print(mensaje_consola)
         elif opcion == '4':
             actualizar_producto(gestion)
         elif opcion == '5':
