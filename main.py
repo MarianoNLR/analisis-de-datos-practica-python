@@ -5,7 +5,10 @@ from productos.ProductoAlimenticio import ProductoAlimenticio
 from productos.ProductoElectronico import ProductoElectronico
 
 def limpiar_consola():
-    #TODO
+    if platform.system() == 'Windows':
+        os.system('cls')
+    else:
+        os.system('clear')
     pass
 
 def mostrar_menu():
@@ -53,7 +56,6 @@ def agregar_producto(gestion, opcion_producto):
 def buscar_producto_por_codigo(gestion):
     codigo = input("Ingrese el codigo del producto: ")
     producto = gestion.leer_producto(codigo)
-    input("Presione Enter para continuar...")
     return producto
 
 def eliminar_producto(gestion):
@@ -171,6 +173,7 @@ if __name__ == "__main__":
     gestion = GestionProductos(archivo_productos)
     
     while True:
+        limpiar_consola()
         mostrar_menu()
         print("Seleccione una de las opciones:", end = ' ')
         opcion = input()
@@ -182,12 +185,12 @@ if __name__ == "__main__":
             mensaje_consola = ""
             if 'fecha_vencimiento' in producto_datos:
                 producto = ProductoAlimenticio(**producto_datos)
-                mensaje_consola += """==== Producto Alimenticio ====\n"""
             else:
                 producto = ProductoElectronico(**producto_datos)
-                mensaje_consola += """==== Producto Electronico ====\n"""
-            mensaje_consola += f"{producto}"
+            mensaje_consola += f"""{producto}
+=========================================="""
             print(mensaje_consola)
+            input("Presione Enter para continuar...")
         elif opcion == '4':
             actualizar_producto(gestion)
         elif opcion == '5':

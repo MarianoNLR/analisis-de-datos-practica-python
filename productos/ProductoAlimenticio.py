@@ -22,4 +22,4 @@ class ProductoAlimenticio(Producto):
         
     def __str__(self): 
         return f"""{super().__str__()}Fecha Vencimiento: {self._fecha_vencimiento}
-        Libre de gluten: {self._es_libre_gluten}"""
+Libre de gluten: {self._es_libre_gluten}"""
