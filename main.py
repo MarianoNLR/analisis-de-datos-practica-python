@@ -40,13 +40,24 @@ def agregar_producto(gestion, opcion_producto):
             while es_libre_gluten != 'y' and es_libre_gluten != 'n':
                 print("Opciones invalida. Digite 'y' (si) o 'n' (no)")
                 es_libre_gluten = input("Es libre de gluten: y/n")
-
+            
             es_libre_gluten = True if es_libre_gluten == 'y' else False
-            producto = ProductoAlimenticio(codigo_producto, nombre, precio, stock, marca, categoria, fecha_vencimiento, es_libre_gluten)
+            try:
+                producto = ProductoAlimenticio(codigo_producto, nombre, precio, stock, marca, categoria, fecha_vencimiento, es_libre_gluten)
+            except ValueError as error:
+                print(f"Error al crear producto alimenticio.")
+                print(f"{error}")
+                input("Presione Enter para continuar...")
+            
         else:
             color = input("Ingrese color para el producto:")
             meses_garantia = input("Ingrese los meses de garantias del producto:")
-            producto = ProductoElectronico(codigo_producto, nombre, precio, stock, marca, categoria, color, meses_garantia)
+            try:
+                producto = ProductoElectronico(codigo_producto, nombre, precio, stock, marca, categoria, color, meses_garantia)
+            except Exception as error:
+                print(f"Error al crear producto electronico.")
+                print(f"{error}")
+            
         
         gestion.agregar_producto(producto)
         input("Presione Enter para continuar...")
@@ -76,6 +87,9 @@ def listar_productos(gestion):
 
 def actualizar_producto(gestion):
     producto = buscar_producto_por_codigo(gestion)
+    if (producto is None):
+        input("Presione Enter para continuar...")
+        return
     print("========== Menú de Actualizacion ==========")
     opcion_valida = False
     opciones_campos = {
