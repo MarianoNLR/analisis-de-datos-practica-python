@@ -27,6 +27,8 @@ class ProductoAlimenticio(Producto):
             return fecha
         except ValueError as error:
             raise ValueError(f"Error al cargar la fecha de vencimiento: La fecha se debe ingresar con el formato DD/MM/YYYY")
+        except Exception as error:
+            raise Exception(f"Ocurrio un error al ingresar la fecha de vencimiento")
     
     def to_dict(self):
         data = super().to_dict()
