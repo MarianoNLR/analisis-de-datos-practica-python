@@ -61,8 +61,9 @@ def agregar_producto(gestion, opcion_producto):
         
         gestion.agregar_producto(producto)
         input("Presione Enter para continuar...")
-    except Exception as error:
-        print(f"Error: {error}")
+    except ValueError as error:
+        print(f"Error en el ingreso de datos: {error}")
+        input("Presione Enter para continuar...")
 
 def buscar_producto_por_codigo(gestion):
     codigo = input("Ingrese el codigo del producto: ")
