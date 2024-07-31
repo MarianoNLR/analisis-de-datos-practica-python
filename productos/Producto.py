@@ -1,11 +1,11 @@
 class Producto:
     def __init__(self, codigo_producto, nombre, precio, stock, marca, categoria):
-        self._codigo_producto = codigo_producto
-        self._nombre = nombre
-        self._precio = precio
-        self._stock = stock
-        self._marca = marca
-        self._categoria = categoria
+        self.codigo_producto = codigo_producto
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+        self.marca = marca
+        self.categoria = categoria
     
     @property
     def codigo_producto(self):
@@ -30,6 +30,37 @@ class Producto:
     @property
     def categoria(self):
         return self._categoria
+
+    @codigo_producto.setter
+    def codigo_producto(self, codigo_producto):
+        self._codigo_producto = codigo_producto
+    
+    @nombre.setter
+    def nombre(self, nuevo_nombre):
+        self._nombre = nuevo_nombre
+    
+    @precio.setter
+    def precio(self, nuevo_precio): 
+        try:
+            self._precio = float(nuevo_precio)
+        except ValueError as error:
+            raise ValueError("El valor del precio ingresado debe ser un numero!")
+    
+    @stock.setter
+    def stock(self, nuevo_stock):
+        try:
+            self._stock = int(nuevo_stock)
+        except ValueError as error:
+            raise ValueError("El valor de stock ingresado debe ser un numero entero!")
+    
+    @marca.setter
+    def marca(self, nueva_marca):
+        self._marca = nueva_marca
+    
+    @categoria.setter
+    def categoria(self, nueva_categoria):
+        self._categoria = nueva_categoria
+        
     
     def to_dict(self):
         return {
