@@ -4,8 +4,8 @@ from productos.Producto import Producto
 class ProductoElectronico(Producto): 
     def __init__(self, codigo_producto, nombre, precio, stock, marca, categoria, color, meses_garantia):
         super().__init__(codigo_producto, nombre, precio, stock, marca, categoria)
-        self._color = color
-        self._meses_garantia = meses_garantia
+        self.color = color
+        self.meses_garantia = meses_garantia
     
     @property
     def color(self):
@@ -14,6 +14,15 @@ class ProductoElectronico(Producto):
     @property
     def meses_garantia(self): 
         return self._meses_garantia
+    
+    @color.setter
+    def color(self, color):
+        self._color = color
+    
+    @meses_garantia.setter
+    def meses_garantia(self, nuevo_meses_garantia):
+        self._meses_garantia = nuevo_meses_garantia
+    
     
     def to_dict(self):
         data = super().to_dict()
