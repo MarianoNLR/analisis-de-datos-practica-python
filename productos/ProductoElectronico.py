@@ -1,3 +1,4 @@
+from multiprocessing import Value
 from productos.Producto import Producto
 
 
@@ -21,7 +22,11 @@ class ProductoElectronico(Producto):
     
     @meses_garantia.setter
     def meses_garantia(self, nuevo_meses_garantia):
-        self._meses_garantia = nuevo_meses_garantia
+        try:
+            self._meses_garantia = int(nuevo_meses_garantia)
+        except ValueError as error:
+            raise ValueError("La cantidad de meses de garantia debe ser un número entero!")
+        
     
     
     def to_dict(self):
