@@ -26,44 +26,46 @@ def mostrar_menu():
         """)
     
 def agregar_producto(gestion, opcion_producto):
-    try:
-        codigo_producto = input("Ingrese el codigo del producto: ")
-        nombre = input("Ingrese el nombre del producto: ")
-        precio = float(input("Ingrese el precio del producto: "))
-        stock = int(input("Ingrese la cantidad en stock: "))
-        marca = input("Ingrese la marca del producto: ")
-        categoria = input("Ingrese una categoria para el producto: ")
+    codigo_producto = input("Ingrese el codigo del producto: ")
+    nombre = input("Ingrese el nombre del producto: ")
+    precio = input("Ingrese el precio del producto: ")
+    stock = input("Ingrese la cantidad en stock: ")
+    marca = input("Ingrese la marca del producto: ")
+    categoria = input("Ingrese una categoria para el producto: ")
+    
+    if opcion_producto == '1':
+        fecha_vencimiento = input("Ingrese la fecha de vencimiento: ")
+        es_libre_gluten = input("Es libre de gluten (y/n): ")
+        while es_libre_gluten != 'y' and es_libre_gluten != 'n':
+            print("Opciones invalida. Digite 'y' (si) o 'n' (no)")
+            es_libre_gluten = input("Es libre de gluten: y/n")
         
-        if opcion_producto == '1':
-            fecha_vencimiento = input("Ingrese la fecha de vencimiento: ")
-            es_libre_gluten = input("Es libre de gluten (y/n): ")
-            while es_libre_gluten != 'y' and es_libre_gluten != 'n':
-                print("Opciones invalida. Digite 'y' (si) o 'n' (no)")
-                es_libre_gluten = input("Es libre de gluten: y/n")
-            
-            es_libre_gluten = True if es_libre_gluten == 'y' else False
-            try:
-                producto = ProductoAlimenticio(codigo_producto, nombre, precio, stock, marca, categoria, fecha_vencimiento, es_libre_gluten)
-            except ValueError as error:
-                print(f"Error al crear producto alimenticio.")
-                print(f"{error}")
-                input("Presione Enter para continuar...")
-            
+        es_libre_gluten = True if es_libre_gluten == 'y' else False
+        try:
+            producto = ProductoAlimenticio(codigo_producto, nombre, precio, stock, marca, categoria, fecha_vencimiento, es_libre_gluten)
+        except ValueError as error:
+            print(f"Error al crear producto alimenticio.")
+            print(f"{error}")
+            input("Presione Enter para continuar...")
+            return
         else:
-            color = input("Ingrese color para el producto:")
-            meses_garantia = input("Ingrese los meses de garantias del producto:")
-            try:
-                producto = ProductoElectronico(codigo_producto, nombre, precio, stock, marca, categoria, color, meses_garantia)
-            except Exception as error:
-                print(f"Error al crear producto electronico.")
-                print(f"{error}")
-            
+            gestion.agregar_producto(producto)
         
-        gestion.agregar_producto(producto)
-        input("Presione Enter para continuar...")
-    except ValueError as error:
-        print(f"Error en el ingreso de datos: {error}")
-        input("Presione Enter para continuar...")
+    else:
+        color = input("Ingrese color para el producto:")
+        meses_garantia = input("Ingrese los meses de garantias del producto:")
+        try:
+            producto = ProductoElectronico(codigo_producto, nombre, precio, stock, marca, categoria, color, meses_garantia)
+        except Exception as error:
+            print(f"Error al crear producto electronico.")
+            print(f"{error}")
+            input("Presione Enter para continuar...")
+            return
+        else:
+            gestion.agregar_producto(producto)
+        
+        
+    input("Presione Enter para continuar...")
 
 def buscar_producto_por_codigo(gestion):
     codigo = input("Ingrese el codigo del producto: ")
