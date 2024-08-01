@@ -52,8 +52,8 @@ def agregar_producto(gestion, opcion_producto):
             gestion.agregar_producto(producto)
         
     else:
-        color = input("Ingrese color para el producto:")
-        meses_garantia = input("Ingrese los meses de garantias del producto:")
+        color = input("Ingrese color para el producto: ")
+        meses_garantia = input("Ingrese los meses de garantias del producto: ")
         try:
             producto = ProductoElectronico(codigo_producto, nombre, precio, stock, marca, categoria, color, meses_garantia)
         except Exception as error:
@@ -89,12 +89,17 @@ def listar_productos(gestion):
     input("Presione Enter para continuar...")
 
 def actualizar_producto(gestion):
+    #Se reutiliza la funcion de buscar por codigo
     producto = buscar_producto_por_codigo(gestion)
+    
     if (producto is None):
         input("Presione Enter para continuar...")
         return
     print("========== Menú de Actualizacion ==========")
-    opcion_valida = False
+    
+    #Dictionario para seleccionar el campo segun la opcion ingresada por el usuario
+    #Indice 0: Nombre de la propiedad dentro del json
+    #Indice 1: Nombre del campo con otro formato para mostrar en consola.
     opciones_campos = {
         '1': ["nombre", "Nombre"],
         '2': ["precio", "Precio"],
@@ -102,15 +107,20 @@ def actualizar_producto(gestion):
         '4': ["marca", "Marca"],
         '5': ["categoria", "Categoria"]
     }
+    
     while True:
         mostrar_menu_actualizar_campos(producto)
         opcion = input("Seleccione el campo que desea actualizar: ")
         
+        #Opcion de salir del menú de actualizacion
         if opcion == '8':
             break
         
+        #Se obtiene el arreglo correspondiente segun la opcion del usuario.
+        #Sirve para los atributos generales.
         campo = opciones_campos.get(opcion)
-            
+        
+        #Control para atributos especificos segun el tipo de producto.
         if opcion == '6':
             if 'fecha_vencimiento' in producto:
                 campo = ["fecha_vencimiento","Fecha de Vencimiento"]
@@ -125,6 +135,7 @@ def actualizar_producto(gestion):
         if campo is None:
             print("Ingrese una opcion válida")
             continue
+        
         print("-----------------------------------------------")
         print(f"Campo a actualizar: {campo[1]}")
         valor = input(f"Nuevo {campo[1]}: ")
@@ -166,6 +177,7 @@ def actualizar_producto(gestion):
         input("Presione Enter para continuar...")
 
 def mostrar_menu_actualizar_campos(producto):
+    #Opciones generales de producto.
     menu = """
 ========= Seleccione el campo a actualizar =========
 1.Nombre.
@@ -174,6 +186,7 @@ def mostrar_menu_actualizar_campos(producto):
 4.Marca.
 5.Categoria.
 """
+    #Agregar al menu las opciones segun el tipo de producto.
     if 'fecha_vencimiento' in producto:
         menu += """6.Fecha de Vencimiento.
 7.Libre de gluten.
@@ -212,10 +225,8 @@ if __name__ == "__main__":
             actualizar_producto(gestion)
         elif opcion == '5':
             eliminar_producto(gestion)
-            pass
         elif opcion == '6':
             listar_productos(gestion)
-            pass
         elif opcion == '7':
             break;
         else: 
