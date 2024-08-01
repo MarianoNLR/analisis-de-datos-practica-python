@@ -77,15 +77,15 @@ class GestionProductos:
             datos = self.leer_datos()
             if str(codigo_producto) in datos.keys():
                 if 'fecha_vencimiento' in datos[codigo_producto]:
-                    datos[codigo_producto][campo] = valor
+                    datos[codigo_producto][campo[0]] = valor
                     producto = ProductoAlimenticio(**datos[codigo_producto])
                 else:
-                    datos[codigo_producto][campo] = valor
+                    datos[codigo_producto][campo[0]] = valor
                     producto = ProductoElectronico(**datos[codigo_producto])
                 
                 datos[producto.codigo_producto] = producto.to_dict()
                 self.guardar_datos(datos)
-                print(f"{campo} actualizado correctamente.")
+                print(f"{campo[1]} actualizado correctamente.")
             else:
                 print(f"No existe producto con el codigo proporcionado.")
         except Exception as error:

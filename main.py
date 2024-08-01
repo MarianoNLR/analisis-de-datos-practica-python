@@ -96,11 +96,11 @@ def actualizar_producto(gestion):
     print("========== Menú de Actualizacion ==========")
     opcion_valida = False
     opciones_campos = {
-        '1': "nombre",
-        '2': "precio",
-        '3': "stock",
-        '4': "marca",
-        '5': "categoria",
+        '1': ["nombre", "Nombre"],
+        '2': ["precio", "Precio"],
+        '3': ["stock", "Stock"],
+        '4': ["marca", "Marca"],
+        '5': ["categoria", "Categoria"]
     }
     while True:
         mostrar_menu_actualizar_campos(producto)
@@ -113,21 +113,21 @@ def actualizar_producto(gestion):
             
         if opcion == '6':
             if 'fecha_vencimiento' in producto:
-                campo = "fecha_vencimiento"
+                campo = ["fecha_vencimiento","Fecha de Vencimiento"]
             else:
-                campo = "color"
+                campo = ["color", "Color"]
         if opcion == '7':
             if 'fecha_vencimiento' in producto:
-                campo = "es_libre_gluten"
+                campo = ["es_libre_gluten", "Es libre de gluten"]
             else:
-                campo = "meses_garantia"
+                campo = ["meses_garantia", "Meses de Garantia"]
 
         if campo is None:
             print("Ingrese una opcion válida")
             continue
-        
-        print(f"Campo a actualizar: {campo}")
-        valor = input(f"Nuevo {campo}: ")
+        print("-----------------------------------------------")
+        print(f"Campo a actualizar: {campo[1]}")
+        valor = input(f"Nuevo {campo[1]}: ")
         '''
         #     opcion_valida = True
         # if opcion == '1':
