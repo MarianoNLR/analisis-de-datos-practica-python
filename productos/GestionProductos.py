@@ -34,14 +34,6 @@ class GestionProductos:
             datos = self.leer_datos()
             if codigo_producto in datos:
                 producto_datos = datos[codigo_producto]
-                
-                # if 'fecha_vencimiento' in producto_datos:
-                #     producto = ProductoAlimenticio(**producto_datos)
-                #     mensaje_consola += """==== Producto Alimenticio ====\n"""
-                # else:
-                #     producto = ProductoElectronico(**producto_datos)
-                #     mensaje_consola += """==== Producto Electronico ====\n"""
-                # mensaje_consola += f"{producto}"
                 return producto_datos
             else:
                 print(f"No se ha encontrado un producto con el codigo: {codigo_producto}.")
@@ -84,7 +76,14 @@ class GestionProductos:
         try:
             datos = self.leer_datos()
             if str(codigo_producto) in datos.keys():
-                datos[codigo_producto][campo] = valor
+                if 'fecha_vencimiento' in datos[codigo_producto]:
+                    datos[codigo_producto][campo] = valor
+                    producto = ProductoAlimenticio(**datos[codigo_producto])
+                else:
+                    datos[codigo_producto][campo] = valor
+                    producto = ProductoElectronico(**datos[codigo_producto])
+                
+                datos[producto.codigo_producto] = producto.to_dict()
                 self.guardar_datos(datos)
                 print(f"{campo} actualizado correctamente.")
             else:
