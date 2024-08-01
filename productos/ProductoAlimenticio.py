@@ -5,7 +5,7 @@ class ProductoAlimenticio(Producto):
     def __init__(self, codigo_producto, nombre, precio, stock, marca, categoria, fecha_vencimiento, es_libre_gluten):
         super().__init__(codigo_producto, nombre, precio, stock, marca, categoria)
         self._fecha_vencimiento = self.validar_fecha_vencimiento(fecha_vencimiento)
-        self._es_libre_gluten = es_libre_gluten
+        self.es_libre_gluten = es_libre_gluten
         
     @property
     def fecha_vencimiento(self):
@@ -18,6 +18,17 @@ class ProductoAlimenticio(Producto):
     @fecha_vencimiento.setter
     def fecha_vencimiento(self, nueva_fecha):
         self._fecha_vencimiento = self.validar_fecha_vencimiento(nueva_fecha)
+    
+    @es_libre_gluten.setter
+    def es_libre_gluten(self, nuevo_valor):
+        if nuevo_valor not in ['y', 'n', True, False]:
+            raise ValueError("Para definir si el producto es libre de gluten o no debe ingresar 'y' (si) o 'n' (no)")
+        else:
+            if nuevo_valor == 'y':
+                self._es_libre_gluten = True 
+            else:
+                self._es_libre_gluten = False
+            
     
     def validar_fecha_vencimiento(self, fecha):
         try:
